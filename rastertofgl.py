@@ -7,7 +7,7 @@ from PIL import Image
 
 CupsRas3 = namedtuple(
     # Documentation at https://www.cups.org/doc/spec-raster.html
-    'CupsRasHeader',
+    'CupsRas3',
     'MediaClass MediaColor MediaType OutputType AdvanceDistance AdvanceMedia Collate CutMedia Duplex HWResolutionH '
     'HWResolutionV ImagingBoundingBoxL ImagingBoundingBoxB ImagingBoundingBoxR ImagingBoundingBoxT '
     'InsertSheet Jog LeadingEdge MarginsL MarginsB ManualFeed MediaPosition MediaWeight MirrorPrint '
@@ -27,14 +27,15 @@ CupsRas3 = namedtuple(
 def read_ras3(rdata):
     if not rdata:
         raise ValueError('No data received')
-    magic = unpack('@4s', rdata[0:4])[0]
 
+    # Check for magic word (either big-endian or little-endian)
+    magic = unpack('@4s', rdata[0:4])[0]
     if magic != b'RaS3' and magic != b'3SaR':
         raise ValueError("This is not in RaS3 format")
-    rdata = rdata[4:]
+    rdata = rdata[4:]  # Strip magic word
     pages = []
 
-    while rdata:
+    while rdata:  # Loop over all pages
         struct_data = unpack(
             '@64s 64s 64s 64s I I I I I II IIII I I I II I I I I I I I I II I I I I I I I I I I I I I '
             'I I I f ff ffff IIIIIIIIIIIIIIII ffffffffffffffff 64s 64s 64s 64s 64s 64s 64s 64s 64s 64s '
@@ -42,13 +43,17 @@ def read_ras3(rdata):
             rdata[0:1796]
         )
         data = [
+            # Strip trailing null-bytes of strings
             b.decode().rstrip('\x00') if isinstance(b, bytes) else b
             for b in struct_data
         ]
         header = CupsRas3._make(data)
 
+        # Read image data of this page into a bytearray
         imgdata = rdata[1796:1796 + (header.cupsWidth * header.cupsHeight * header.cupsBitsPerPixel // 8)]
         pages.append((header, imgdata))
+
+        # Remove this page from the data stream, continue with the next page
         rdata = rdata[1796 + (header.cupsWidth * header.cupsHeight * header.cupsBitsPerPixel // 8):]
 
     return pages
@@ -78,10 +83,12 @@ for i, datatuple in enumerate(pages):
                 if pixels[min(x, im.width - 1), min(yoffset + j, im.height - 1)] < 128:
                     row[x] |= 1 << (7 - j)
         if any(row):
+            # FGL: <RCy,x>: Move to correct position
+            # FGL: <Gnn>: nn bytes of graphics are following
             sys.stdout.buffer.write('<RC{},{}><G{}>'.format(yoffset, 0, len(row)).encode())
             sys.stdout.buffer.write(bytes(row))
 
-    if header.CutMedia in (1, 2, 3) and i == len(pages) - 1:  # Cut after file/job/set
+    if header.CutMedia in (1, 2, 3) and i == len(pages) - 1:  # Cut after last ticket of file/job/set
         sys.stdout.buffer.write(b'<p>')
     elif header.CutMedia == 4:  # Cut after page
         sys.stdout.buffer.write(b'<p>')
