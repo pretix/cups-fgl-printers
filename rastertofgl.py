@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import io
 import sys
 from collections import namedtuple
 from struct import unpack
@@ -26,9 +25,8 @@ CupsRas3 = namedtuple(
     'cupsString15 cupsString16 cupsMarkerType cupsRenderingIntent cupsPageSizeName'
 )
 
+job = sys.argv[1]
 
-# TODO: Rotations
-# TODO: Paper sizes
 
 def read_ras3(rdata):
     magic = unpack('@4s', rdata[0:4])[0]
@@ -62,26 +60,32 @@ pages = read_ras3(rdata)
 
 for i, datatuple in enumerate(pages):
     (header, imgdata) = datatuple
+
     if header.cupsColorSpace != 0 or header.cupsNumColors != 1:
         raise ValueError('Invalid color space, only monocolor supported')
 
     im = Image.new("L", (header.cupsWidth, header.cupsHeight))
+    im = im.rotate(90)
     pixels = im.load()
     for i, b in enumerate(imgdata):
         pixels[i % header.cupsWidth, i // header.cupsWidth] = b
+
     im = im.convert('1')
+    pixels = im.load()
 
-    bbuffer = io.BytesIO()
-    im.save(bbuffer, format='PCX')
-    pcximg = bbuffer.getvalue()
+    for yoffset in range(0, im.height, 8):
+        row = [0] * im.width
+        for x in range(im.width):
+            for j in range(8):
+                if pixels[min(x, im.width - 1), min(yoffset + j, im.height - 1)] < 128:
+                    row[x] |= 1 << (7 - j)
+        if any(row):
+            sys.stdout.buffer.write('<RC{},{}><G{}>'.format(yoffset, 0, len(row)).encode())
+            sys.stdout.buffer.write(bytes(row))
 
-    #sys.stdout.buffer.write(b'<CB>')
-    sys.stdout.buffer.write('<RC0,0><NR><pcx><G{}>'.format(len(pcximg)).encode())
-    sys.stdout.buffer.write(pcximg)
     if header.CutMedia in (1, 2, 3) and i == len(pages) - 1:  # Cut after file/job/set
         sys.stdout.buffer.write(b'<p>')
     elif header.CutMedia == 4:  # Cut after page
         sys.stdout.buffer.write(b'<p>')
-    else:
+    else:  # Do not cut
         sys.stdout.buffer.write(b'<q>')
-    #sys.stdout.buffer.write(b'0x04')
