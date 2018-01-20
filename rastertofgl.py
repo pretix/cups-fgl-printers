@@ -5,8 +5,6 @@ from struct import unpack
 
 from PIL import Image
 
-rdata = sys.stdin.buffer.read()
-
 CupsRas3 = namedtuple(
     # Documentation at https://www.cups.org/doc/spec-raster.html
     'CupsRasHeader',
@@ -25,10 +23,10 @@ CupsRas3 = namedtuple(
     'cupsString15 cupsString16 cupsMarkerType cupsRenderingIntent cupsPageSizeName'
 )
 
-job = sys.argv[1]
-
 
 def read_ras3(rdata):
+    if not rdata:
+        raise ValueError('No data received')
     magic = unpack('@4s', rdata[0:4])[0]
 
     if magic != b'RaS3' and magic != b'3SaR':
@@ -56,7 +54,7 @@ def read_ras3(rdata):
     return pages
 
 
-pages = read_ras3(rdata)
+pages = read_ras3(sys.stdin.buffer.read())
 
 for i, datatuple in enumerate(pages):
     (header, imgdata) = datatuple
@@ -67,8 +65,8 @@ for i, datatuple in enumerate(pages):
     im = Image.new("L", (header.cupsWidth, header.cupsHeight))
     im = im.rotate(90)
     pixels = im.load()
-    for i, b in enumerate(imgdata):
-        pixels[i % header.cupsWidth, i // header.cupsWidth] = b
+    for j, b in enumerate(imgdata):
+        pixels[j % header.cupsWidth, j // header.cupsWidth] = b
 
     im = im.convert('1')
     pixels = im.load()
