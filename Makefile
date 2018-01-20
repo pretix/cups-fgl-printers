@@ -1,4 +1,4 @@
 all: ppds
 
 ppds:
-	ppdc drivers/*
+	ppdc -z drivers/*
