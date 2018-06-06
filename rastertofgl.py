@@ -3,6 +3,7 @@ import sys
 from collections import namedtuple
 from struct import unpack
 
+import numpy as np
 from PIL import Image
 
 CupsRas3 = namedtuple(
@@ -67,26 +68,22 @@ for i, datatuple in enumerate(pages):
     if header.cupsColorSpace != 0 or header.cupsNumColors != 1:
         raise ValueError('Invalid color space, only monocolor supported')
 
-    im = Image.new("L", (header.cupsWidth, header.cupsHeight))
-    im = im.rotate(90)
-    pixels = im.load()
-    for j, b in enumerate(imgdata):
-        pixels[j % header.cupsWidth, j // header.cupsWidth] = b
+    npdata = np.frombuffer(imgdata, dtype=np.uint8)
+    npixels = npdata.reshape((header.cupsHeight, header.cupsWidth)).transpose()
 
-    im = im.convert('1')
-    pixels = im.load()
-
-    for yoffset in range(0, im.height, 8):
-        row = [0] * im.width
-        for x in range(im.width):
-            for j in range(8):
-                if pixels[min(x, im.width - 1), min(yoffset + j, im.height - 1)] < 128:
-                    row[x] |= 1 << (7 - j)
-        if any(row):
+    im = Image.fromarray(npixels, 'L')
+    im = im.convert('1', dither=1)
+    npixels = np.array(im.getdata()).reshape((header.cupsWidth, header.cupsHeight))
+    for yoffset in range(0, npixels.shape[1], 8):
+        row_octet = np.zeros(npixels.shape[0], dtype=np.uint8)
+        for j in range(8):
+            row_blacks = (npixels[:, min(yoffset + j, npixels.shape[1] -1)] < 128).astype(np.uint8)
+            row_octet = np.bitwise_or(row_octet, np.left_shift(row_blacks, 7 - j))
+        if row_octet.any():
             # FGL: <RCy,x>: Move to correct position
-            # FGL: <Gnn>: nn bytes of graphics are following
-            sys.stdout.buffer.write('<RC{},{}><G{}>'.format(yoffset, 0, len(row)).encode())
-            sys.stdout.buffer.write(bytes(row))
+            # FGL: <Gnn>: nn bytes of graphics are followinga
+            sys.stdout.buffer.write('<RC{},{}><G{}>'.format(yoffset, 0, row_octet.shape[0]).encode())
+            sys.stdout.buffer.write(row_octet.tostring())
 
     if header.CutMedia in (1, 2, 3) and i == len(pages) - 1:  # Cut after last ticket of file/job/set
         sys.stdout.buffer.write(b'<p>')
