@@ -17,7 +17,7 @@ Priority: optional
 Architecture: any
 Maintainer: Raphael Michel
 License: GPL-3
-Depends: python3, python3-pillow
+Depends: python3, python3-pillow, python3-numpy
 Description: CUPS driver for FGL-based ticket printers
  .
  CUPS driver for FGL-based ticket printers
