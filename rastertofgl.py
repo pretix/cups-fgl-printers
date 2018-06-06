@@ -73,6 +73,7 @@ for i, datatuple in enumerate(pages):
 
     im = Image.fromarray(npixels, 'L')
     im = im.convert('1', dither=1)
+    sys.stdout.buffer.write(b'<CB>')
     npixels = np.array(im.getdata()).reshape((header.cupsWidth, header.cupsHeight))
     for yoffset in range(0, npixels.shape[1], 8):
         row_octet = np.zeros(npixels.shape[0], dtype=np.uint8)
