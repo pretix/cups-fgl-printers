@@ -71,10 +71,12 @@ for i, datatuple in enumerate(pages):
     npdata = np.frombuffer(imgdata, dtype=np.uint8)
     npixels = npdata.reshape((header.cupsHeight, header.cupsWidth)).transpose()
 
-    im = Image.fromarray(npixels, 'L')
-    im = im.convert('1', dither=1)
+    if np.any(np.logical_and(npixels > 10, npixels < 245)):
+        im = Image.fromarray(npixels, 'L')
+        im = im.convert('1', dither=1)
+        npixels = np.array(im.getdata()).reshape((header.cupsWidth, header.cupsHeight))
+
     sys.stdout.buffer.write(b'<CB>')
-    npixels = np.array(im.getdata()).reshape((header.cupsWidth, header.cupsHeight))
     for yoffset in range(0, npixels.shape[1], 8):
         row_octet = np.zeros(npixels.shape[0], dtype=np.uint8)
         for j in range(8):
