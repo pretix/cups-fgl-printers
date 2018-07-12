@@ -1,4 +1,4 @@
 all: ppds
 
 ppds:
-	ppdc -z drivers/*
+	LC_ALL=C ppdc -z drivers/*

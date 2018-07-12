@@ -12,36 +12,36 @@
   ColorModel Gray/Grayscale w chunky 0
 
   Group "General/General"
-    Option "fooCutMedia/Cut Labels" PickOne AnySetup 10,0
+    Option "fooCutMedia/Cut Labels" PickOne AnySetup 10.0
       Choice "Never/Never cut media" "<</CutMedia 0>>setpagedevice"
       *Choice "Job/Cut after job" "<</CutMedia 2>>setpagedevice"
       Choice "Page/Cut after every ticket" "<</CutMedia 4>>setpagedevice"
 
-  CustomMedia "ticket2x2/Ticket 2x2in" 144,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[144 144]/ImagingBBox null>>setpagedevice" "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket2.50x2/Ticket 2.5x2in" 180,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[180 144]/ImagingBBox null>>setpagedevice" "<</PageSize[180 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket2.75x2/Ticket 2.75x2in" 198,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[198 144]/ImagingBBox null>>setpagedevice" "<</PageSize[198 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket3x2/Ticket 3x2in" 216,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[216 144]/ImagingBBox null>>setpagedevice" "<</PageSize[216 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket3.50x2/Ticket 3.5x2in" 252,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[252 144]/ImagingBBox null>>setpagedevice" "<</PageSize[252 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket4x2/Ticket 4x2in" 288,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[288 144]/ImagingBBox null>>setpagedevice" "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket4.50x2/Ticket 4.5x2in" 324,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[324 144]/ImagingBBox null>>setpagedevice" "<</PageSize[324 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket5x2/Ticket 5x2in" 360,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[360 144]/ImagingBBox null>>setpagedevice" "<</PageSize[360 144]/ImagingBBox null>>setpagedevice"
-  *CustomMedia "ticket5.50x2/Ticket 5.5x2in" 396,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[396 144]/ImagingBBox null>>setpagedevice" "<</PageSize[396 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket5.625x2/Ticket 5.625x2in" 405,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[405 144]/ImagingBBox null>>setpagedevice" "<</PageSize[405 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket6x2/Ticket 6x2in" 432,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[432 144]/ImagingBBox null>>setpagedevice" "<</PageSize[432 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket6.375x1.328/Ticket 6.375x1.328in" 459,00 95,62 1,00 2,00 0,00 0,00 "<</PageSize[459 96]/ImagingBBox null>>setpagedevice" "<</PageSize[459 96]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket6.50x2/Ticket 6.5x2in" 468,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[468 144]/ImagingBBox null>>setpagedevice" "<</PageSize[468 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket7x2/Ticket 7x2in" 504,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[504 144]/ImagingBBox null>>setpagedevice" "<</PageSize[504 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket8x1/Ticket 8x1in" 576,00 72,00 1,00 2,00 0,00 0,00 "<</PageSize[576 72]/ImagingBBox null>>setpagedevice" "<</PageSize[576 72]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket8x1.328/Ticket 8x1.328in" 576,00 95,62 1,00 2,00 0,00 0,00 "<</PageSize[576 96]/ImagingBBox null>>setpagedevice" "<</PageSize[576 96]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket8x2/Ticket 8x2in" 576,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[576 144]/ImagingBBox null>>setpagedevice" "<</PageSize[576 144]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket11x1/Ticket 11x1in" 792,00 72,00 1,00 2,00 0,00 0,00 "<</PageSize[792 72]/ImagingBBox null>>setpagedevice" "<</PageSize[792 72]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket11x1.328/Ticket 11x1.328in" 792,00 95,62 1,00 2,00 0,00 0,00 "<</PageSize[792 96]/ImagingBBox null>>setpagedevice" "<</PageSize[792 96]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket16x1/Ticket 16x1in" 1152,00 72,00 1,00 2,00 0,00 0,00 "<</PageSize[1152 72]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 72]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket16x1.328/Ticket 16x1.328in" 1152,00 95,62 1,00 2,00 0,00 0,00 "<</PageSize[1152 96]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 96]/ImagingBBox null>>setpagedevice"
-  CustomMedia "ticket16x2/Ticket 16x2in" 1152,00 144,00 1,00 2,00 0,00 0,00 "<</PageSize[1152 144]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket2x2/Ticket 2x2in" 144.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[144 144]/ImagingBBox null>>setpagedevice" "<</PageSize[144 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket2.50x2/Ticket 2.5x2in" 180.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[180 144]/ImagingBBox null>>setpagedevice" "<</PageSize[180 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket2.75x2/Ticket 2.75x2in" 198.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[198 144]/ImagingBBox null>>setpagedevice" "<</PageSize[198 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket3x2/Ticket 3x2in" 216.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[216 144]/ImagingBBox null>>setpagedevice" "<</PageSize[216 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket3.50x2/Ticket 3.5x2in" 252.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[252 144]/ImagingBBox null>>setpagedevice" "<</PageSize[252 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket4x2/Ticket 4x2in" 288.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[288 144]/ImagingBBox null>>setpagedevice" "<</PageSize[288 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket4.50x2/Ticket 4.5x2in" 324.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[324 144]/ImagingBBox null>>setpagedevice" "<</PageSize[324 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket5x2/Ticket 5x2in" 360.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[360 144]/ImagingBBox null>>setpagedevice" "<</PageSize[360 144]/ImagingBBox null>>setpagedevice"
+  *CustomMedia "ticket5.50x2/Ticket 5.5x2in" 396.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[396 144]/ImagingBBox null>>setpagedevice" "<</PageSize[396 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket5.625x2/Ticket 5.625x2in" 405.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[405 144]/ImagingBBox null>>setpagedevice" "<</PageSize[405 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket6x2/Ticket 6x2in" 432.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[432 144]/ImagingBBox null>>setpagedevice" "<</PageSize[432 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket6.375x1.328/Ticket 6.375x1.328in" 459.00 95.62 1.00 2.00 0.00 0.00 "<</PageSize[459 96]/ImagingBBox null>>setpagedevice" "<</PageSize[459 96]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket6.50x2/Ticket 6.5x2in" 468.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[468 144]/ImagingBBox null>>setpagedevice" "<</PageSize[468 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket7x2/Ticket 7x2in" 504.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[504 144]/ImagingBBox null>>setpagedevice" "<</PageSize[504 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket8x1/Ticket 8x1in" 576.00 72.00 1.00 2.00 0.00 0.00 "<</PageSize[576 72]/ImagingBBox null>>setpagedevice" "<</PageSize[576 72]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket8x1.328/Ticket 8x1.328in" 576.00 95.62 1.00 2.00 0.00 0.00 "<</PageSize[576 96]/ImagingBBox null>>setpagedevice" "<</PageSize[576 96]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket8x2/Ticket 8x2in" 576.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[576 144]/ImagingBBox null>>setpagedevice" "<</PageSize[576 144]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket11x1/Ticket 11x1in" 792.00 72.00 1.00 2.00 0.00 0.00 "<</PageSize[792 72]/ImagingBBox null>>setpagedevice" "<</PageSize[792 72]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket11x1.328/Ticket 11x1.328in" 792.00 95.62 1.00 2.00 0.00 0.00 "<</PageSize[792 96]/ImagingBBox null>>setpagedevice" "<</PageSize[792 96]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket16x1/Ticket 16x1in" 1152.00 72.00 1.00 2.00 0.00 0.00 "<</PageSize[1152 72]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 72]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket16x1.328/Ticket 16x1.328in" 1152.00 95.62 1.00 2.00 0.00 0.00 "<</PageSize[1152 96]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 96]/ImagingBBox null>>setpagedevice"
+  CustomMedia "ticket16x2/Ticket 16x2in" 1152.00 144.00 1.00 2.00 0.00 0.00 "<</PageSize[1152 144]/ImagingBBox null>>setpagedevice" "<</PageSize[1152 144]/ImagingBBox null>>setpagedevice"
 
   VariablePaperSize Yes
-  HWMargins 0,00 0,00 0,00 0,00
-  MinSize 0,00 0,00
-  MaxSize 0,00 0,00
+  HWMargins 0.00 0.00 0.00 0.00
+  MinSize 0.00 0.00
+  MaxSize 0.00 0.00
 }
