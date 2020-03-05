@@ -42,7 +42,7 @@ Arch Linux
 
 Our package is available from the Arch User Repository::
 
-    # yaourt -S cups-fgl-printers-git
+    # yay -S cups-fgl-printers-git
 
 Development
 -----------
